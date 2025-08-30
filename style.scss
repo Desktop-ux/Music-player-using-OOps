@@ -13,10 +13,11 @@ body {
     background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
+/* Base styles (Mobile-first) */
 .card {
     width: 100%;
     height: 100%;
-    border-radius: 15px;
+    border-radius: clamp(10px, 3vw, 15px);
     background: linear-gradient(to bottom, #a25a2d, #402819);
     position: absolute;
     top: 50%;
@@ -26,69 +27,76 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: clamp(0.5rem, 3vw, 1rem);
     transition: background 0.8s ease;
+    padding: clamp(1rem, 4vw, 2rem);
 
     .head {
         text-align: center;
+        width: 100%;
 
         .song_name {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: white;
             font-weight: 400;
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
         }
 
         p {
             color: white;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
         }
-
     }
 
-
-
     .cover {
-        width: 90%;
-        height: 42%;
+        width: clamp(280px, 90%, 400px);
+        height: clamp(200px, 42%, 350px);
         display: flex;
         align-items: center;
         justify-content: center;
-        // border: 2px solid white;
-        border-radius: 10px;
+        border-radius: clamp(8px, 2vw, 10px);
 
         img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
         }
     }
 
     .playhead {
-        width: 90%;
-        height: 2px;
-        background-color: white;
+        width: clamp(280px, 90%, 400px);
+        height: clamp(2px, 0.5vw, 3px);
+        background-color: rgba(255, 255, 255, 0.3);
         position: relative;
-        margin-bottom: 1rem;
+        margin-bottom: clamp(0.5rem, 2vw, 1rem);
+        border-radius: 2px;
 
         .circle {
-            width: 15px;
-            height: 15px;
+            width: clamp(12px, 4vw, 18px);
+            height: clamp(12px, 4vw, 18px);
             border-radius: 50%;
-            // background-color: white;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 0%;
             transform: translate(-50%, -50%);
             background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
 
+        .circle:hover {
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
         .progress {
             height: 100%;
             width: 0%;
-            // position: absolute;
-            // top: 0;
-            // left: 0;
-            // transform: translate(-50%, -50%);
             background-image: linear-gradient(120deg, #a3e900 0%, #96e6a1 100%);
-            box-shadow: 0 0 20px 5px #d4fc79, 0 0 40px 5px #96e6a1;
+            box-shadow: 0 0 clamp(10px, 3vw, 20px) clamp(2px, 1vw, 5px) #d4fc79, 
+                        0 0 clamp(20px, 5vw, 40px) clamp(2px, 1vw, 5px) #96e6a1;
+            border-radius: inherit;
         }
     }
 
@@ -98,29 +106,50 @@ body {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
+        gap: clamp(1rem, 5vw, 2rem);
         color: white;
-        padding: 1rem 0;
-        // border: 1px solid white;
+        padding: clamp(0.5rem, 2vw, 1rem) 0;
         transition: 0.1s all ease-in;
 
         .play {
-            font-size: 5rem;
+            font-size: clamp(3rem, 12vw, 5rem);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .play:hover {
+            transform: scale(1.1);
         }
 
         #pause {
-            font-size: 5rem;
+            font-size: clamp(3rem, 12vw, 5rem);
             display: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #pause:hover {
+            transform: scale(1.1);
+        }
+
+        .next,
+        .prev {
+            font-size: clamp(2rem, 8vw, 3rem);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .next:hover,
+        .prev:hover {
+            transform: scale(1.1);
         }
 
         .next {
-            font-size: 3rem;
-            transform: scale(-100%);
+            transform: scaleX(-1);
         }
 
         .prev {
-            font-size: 3rem;
-            transform: scale(-100%);
+            transform: scaleX(-1);
         }
     }
 
@@ -130,94 +159,284 @@ body {
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
-        gap: 1rem;
+        gap: clamp(0.5rem, 3vw, 1rem);
         color: rgb(178, 178, 178);
-        font-size: 1.5rem;
-        // border: 1px solid white;
-
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        flex-wrap: wrap;
 
         .volume {
-            width: 30vw;
-            height: 30vw;
+            width: clamp(120px, 30vw, 200px);
+            height: clamp(40px, 10vw, 60px);
             position: relative;
-            // border: 1px solid rgb(26, 225, 19);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.5s ease-in-out;
+            cursor: pointer;
 
             #volume-slider {
                 -webkit-appearance: none;
-                width: 150px;
-                height: 6px;
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+                width: clamp(100px, 25vw, 150px);
+                height: clamp(4px, 1.5vw, 6px);
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), 
+                           radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
                 background-blend-mode: multiply, multiply;
-                border-radius: 3px;
+                border-radius: clamp(2px, 1vw, 3px);
                 outline: none;
-                box-shadow: 0 0 10px #96e6a1aa;
-                transition: background 0.3s ease;
+                box-shadow: 0 0 clamp(5px, 2vw, 10px) #96e6a1aa;
+                transition: all 0.3s ease;
                 cursor: pointer;
                 display: none;
                 position: absolute;
                 top: 20%;
-                transform: translateY(50%, -50%);
-                transition: all 0.5s ease-in-out;
-                // z-index: 500;
+                transform: translateY(50%);
             }
 
-            /* Track styles for Firefox */
             #volume-slider::-moz-range-track {
                 background: transparent;
-                height: 6px;
+                height: clamp(4px, 1.5vw, 6px);
             }
 
-            /* Webkit thumb */
             #volume-slider::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                height: 16px;
-                width: 16px;
+                height: clamp(14px, 4vw, 20px);
+                width: clamp(14px, 4vw, 20px);
                 border-radius: 50%;
                 background: white;
                 border: 2px solid #96e6a1;
-                box-shadow: 0 0 10px #96e6a1;
+                box-shadow: 0 0 clamp(5px, 2vw, 10px) #96e6a1;
                 transition: transform 0.2s ease;
+                cursor: pointer;
             }
 
             #volume-slider::-webkit-slider-thumb:hover {
                 transform: scale(1.2);
             }
 
-            /* Firefox thumb */
             #volume-slider::-moz-range-thumb {
-                height: 16px;
-                width: 16px;
+                height: clamp(14px, 4vw, 20px);
+                width: clamp(14px, 4vw, 20px);
                 border-radius: 50%;
                 background: white;
                 border: 2px solid #96e6a1;
-                box-shadow: 0 0 10px #96e6a1;
+                box-shadow: 0 0 clamp(5px, 2vw, 10px) #96e6a1;
                 cursor: pointer;
             }
 
-            /* IE support (optional) */
-            #volume-slider::-ms-thumb {
-                height: 16px;
-                width: 16px;
-                border-radius: 50%;
-                background: white;
-                border: 2px solid #96e6a1;
-                box-shadow: 0 0 10px #96e6a1;
-            }
-
-            .repeat {
-                font-size: 1rem;
-            }
-
+            .repeat,
             .shuffle {
-                font-size: 1rem;
+                font-size: clamp(0.8rem, 3vw, 1rem);
+                cursor: pointer;
+                transition: color 0.3s ease;
             }
 
+            .repeat:hover,
+            .shuffle:hover {
+                color: white;
+            }
+        }
+
+        > * {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        > *:hover {
+            color: white;
         }
     }
+}
 
+/* Small tablets and large phones (576px and up) */
+@media screen and (min-width: 576px) {
+    .card {
+        width: clamp(350px, 85vw, 450px);
+        height: clamp(500px, 90vh, 650px);
+        gap: clamp(1rem, 3vw, 1.5rem);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
 
+    .card .head .song_name {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .card .head p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+    }
+
+    .card .player {
+        gap: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    .card .options {
+        gap: clamp(1rem, 4vw, 1.5rem);
+    }
+}
+
+/* Tablets (768px and up) */
+@media screen and (min-width: 768px) {
+    .card {
+        width: clamp(400px, 50vw, 500px);
+        height: clamp(600px, 80vh, 700px);
+        gap: clamp(0.8rem, 2vw, 1.2rem);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        justify-content: space-between;
+    }
+
+    .card .head {
+        flex-shrink: 0;
+    }
+
+    .card .head .song_name {
+        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    }
+
+    .card .head p {
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
+    }
+
+    .card .cover {
+        width: 90%;
+        height: 40%;
+        flex-shrink: 0;
+    }
+
+    .card .playhead {
+        width: 85%;
+        margin-bottom: clamp(0.8rem, 2vw, 1.2rem);
+        flex-shrink: 0;
+    }
+
+    .card .player {
+        gap: clamp(1.5rem, 3vw, 2rem);
+        padding: clamp(0.8rem, 2vw, 1.2rem) 0;
+        flex-shrink: 0;
+    }
+
+    .card .player .play,
+    .card .player #pause {
+        font-size: clamp(3.5rem, 5vw, 4.5rem);
+    }
+
+    .card .player .next,
+    .card .player .prev {
+        font-size: clamp(2.5rem, 4vw, 3rem);
+    }
+
+    .card .options {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        gap: clamp(1rem, 3vw, 1.5rem);
+        flex-shrink: 0;
+    }
+
+    .card .options .volume {
+        width: clamp(150px, 20vw, 180px);
+        height: clamp(40px, 6vw, 50px);
+    }
+
+    .card .options .volume #volume-slider {
+        width: clamp(130px, 16vw, 150px);
+    }
+}
+
+/* Small laptops and desktops (992px and up) */
+@media screen and (min-width: 992px) {
+    .card {
+        width: clamp(420px, 45vw, 480px);
+        height: clamp(620px, 75vh, 680px);
+        gap: clamp(0.8rem, 1.5vw, 1rem);
+        padding: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .card .head .song_name {
+        font-size: clamp(1.6rem, 2.2vw, 2rem);
+    }
+
+    .card .head p {
+        font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+    }
+
+    .card .cover {
+        width: 92%;
+        height: 38%;
+    }
+
+    .card .playhead {
+        width: 82%;
+    }
+
+    .card .player {
+        gap: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .card .player .play,
+    .card .player #pause {
+        font-size: clamp(4rem, 4.5vw, 4.8rem);
+    }
+
+    .card .player .next,
+    .card .player .prev {
+        font-size: clamp(3rem, 3.5vw, 3.5rem);
+    }
+
+    .card .options {
+        font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    }
+
+    .card .options .volume {
+        width: clamp(160px, 18vw, 190px);
+    }
+
+    .card .options .volume #volume-slider {
+        width: clamp(140px, 15vw, 160px);
+    }
+}
+
+/* Large desktops (1200px and up) */
+@media screen and (min-width: 1200px) {
+    .card {
+        width: clamp(450px, 40vw, 500px);
+        height: clamp(650px, 70vh, 720px);
+        gap: clamp(0.8rem, 1.2vw, 1rem);
+        padding: clamp(2rem, 2.5vw, 2.4rem);
+    }
+
+    .card .head .song_name {
+        font-size: clamp(1.8rem, 2vw, 2.2rem);
+    }
+
+    .card .head p {
+        font-size: clamp(1.15rem, 1.3vw, 1.3rem);
+    }
+
+    .card .cover {
+        width: 80%;
+        height: 36%;
+    }
+
+    .card .playhead {
+        width: 80%;
+    }
+
+    .card .player .play,
+    .card .player #pause {
+        font-size: clamp(4.2rem, 4vw, 5rem);
+    }
+
+    .card .player .next,
+    .card .player .prev {
+        font-size: clamp(3.2rem, 3vw, 3.8rem);
+    }
+
+    .card .options {
+        font-size: clamp(1.4rem, 1.6vw, 1.7rem);
+    }
+
+    .card .options .volume {
+        width: clamp(170px, 16vw, 200px);
+    }
+
+    .card .options .volume #volume-slider {
+        width: clamp(150px, 14vw, 170px);
+    }
 }
